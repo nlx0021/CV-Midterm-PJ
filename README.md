@@ -8,6 +8,8 @@
 
 ## Part1：CIFAR-100
 第一部分的代码在此Repo的“Part1:CIFAR-100”Branch分支上。
+### 环境部署
+在进行运行前，请先将external.zip压缩文件解压到当前文件夹当中，解压得到external文件夹。
 ### 模型训练
 模型的训练在train.py文件中。训练模型可运行以下命令：
 ```
