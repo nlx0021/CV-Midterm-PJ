@@ -281,7 +281,7 @@ if __name__ == '__main__':
                     default=5e-3)
     parser.add_argument('--epochs_n',
                     type=int,
-                    default=300)
+                    default=200)
     args = parser.parse_args()    
     
     device = 'cuda' if torch.cuda.is_available() else 'cpu'
@@ -289,27 +289,19 @@ if __name__ == '__main__':
     epochs_n = args.epochs_n
     LSUV = True
     ################################### Bench 2: Cutout. ##################################
-    cutout = False    
+    cutout = False      # If want to use cutout, set cutout=True
     ################################### Bench 2: Cutout. ##################################                                    
     
     set_random_seeds(21, device=device)
     
-    train_loader, val_loader, test_loader = get_cifar_loader(batch_size=128, n_items=512, data_aug=False, cutout=cutout)
+    train_loader, val_loader, test_loader = get_cifar_loader(batch_size=128, n_items=-1, data_aug=False, cutout=cutout)
     print(len(train_loader.dataset), len(test_loader.dataset), len(val_loader.dataset))
     
-    if LSUV:
-        model = ResNet18_For_CIFAR_100(init_weight=False).to(device)      
-    else:
-        model = ResNet18_For_CIFAR_100(init_weight=True).to(device)      
-    
-    # optimizer = torch.optim.Adam(model.parameters(), lr=lr)
+    model = resnet18()     
     
     optimizer = torch.optim.SGD(model.parameters(), lr=lr, momentum=0.9, weight_decay=1e-3)
-    # optim_scheduler = torch.optim.lr_scheduler.MultiStepLR(optimizer, milestones=[40, 60, 70, 80, 90, 100], gamma=.5)
-    optim_scheduler = torch.optim.lr_scheduler.MultiStepLR(optimizer, milestones=[60, 120, 160, 180, 200, 220, 240, 260, 280], gamma=.5)
-    # optim_scheduler = torch.optim.lr_scheduler.MultiStepLR(optimizer, milestones=[30, 60, 80, 100, 120, 140], gamma=.3)
+    optim_scheduler = torch.optim.lr_scheduler.MultiStepLR(optimizer, milestones=[60, 120, 160], gamma=.2)
     
-    # optim_scheduler = torch.optim.lr_scheduler.StepLR(optimizer, step_size=50, gamma=.1)
     criterion = nn.CrossEntropyLoss()
 
     train(model=model,
@@ -323,12 +315,12 @@ if __name__ == '__main__':
           device=device,
           scheduler=optim_scheduler,
           epochs_n=epochs_n,
-          name='For_test',
+          name=args.experiment,
 ################################### Bench 1: Mixup. ##################################
-          mixup=None,
+          mixup=None,         # If want to use mixup, set mixup=alpha, e.g. mixup=.2
 ################################### Bench 1: Mixup. ##################################     
 ################################### Bench 3: Cutmix. ##################################   
-          cutmix=(1.0, .5),   # (beta, prob)
+          cutmix=(1.0, .5),   # If want to use cutmix, set cutmix=(beta, prob), e.g. cutmix=(1.0, .5)
 ################################### Bench 3: Cutmix. ##################################          
           LSUV=True,
           finetune=None)
