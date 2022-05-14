@@ -297,7 +297,7 @@ if __name__ == '__main__':
     train_loader, val_loader, test_loader = get_cifar_loader(batch_size=128, n_items=-1, data_aug=False, cutout=cutout)
     print(len(train_loader.dataset), len(test_loader.dataset), len(val_loader.dataset))
     
-    model = resnet18()     
+    model = resnet18().to(device)     
     
     optimizer = torch.optim.SGD(model.parameters(), lr=lr, momentum=0.9, weight_decay=1e-3)
     optim_scheduler = torch.optim.lr_scheduler.MultiStepLR(optimizer, milestones=[60, 120, 160], gamma=.2)
