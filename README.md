@@ -59,7 +59,10 @@ VOC数据集下载地址如下，里面已经包括了训练集、测试集、�
 #### b. 使用预训练模型权重
 1. 按照训练步骤训练。
 2. 编辑frcnn.py文件中的model_path，使其指向/logs/路径下对应的模型权重文件。
-3. 运行predict.py，输入img/street.jpg（或使用img文件夹下的其它图片）。
+3. 运行predict.py，输入
+```
+img/street.jpg（或使用img文件夹下的其它图片）
+```
 
 ## Part2：Object Detection：YOLO V3
 第二部分关于YOLO的代码在此Repo的“Part2:Objects Detection: YOLO”Branch分支上。
@@ -89,6 +92,8 @@ VOC数据集下载地址如下，里面已经包括了训练集、测试集、�
 
 #### b. 使用预训练模型权重
 1. 按照训练步骤训练。
-2. 编辑yolo件中的model_path，使其指向/logs/路径下对应的模型权重文件。
-3. 运行predict.py，输入img/street.jpg（或使用img文件夹下的其它图片）。
-
+2. 编辑yolo.py文件中的model_path，使其指向/logs/路径下对应的模型权重文件。
+3. 运行predict.py，输入
+```
+img/street.jpg（或使用img文件夹下的其它图片）
+```
