@@ -68,15 +68,7 @@ img/street.jpg（或使用img文件夹下的其它图片）
 第二部分关于YOLO的代码在此Repo的“Part2:Objects Detection: YOLO”Branch分支上。
 
 ### 数据下载
-VOC数据集下载地址如下，里面已经包括了训练集、测试集、验证集（与测试集一样），无需再次划分：
-链接: https://pan.baidu.com/s/1YuBbBKxm2FGgTU5OfaeC5A
-提取码: uack
-
-
-预训练好的模型下载地址如下，下载后请放在相应模型的/model_data/目录下。
-连接：https://pan.baidu.com/s/1-iy\_HXjzSOyDZigLApZTew?pwd=0514
-提取码：0514
-（同上）
+见Faster R-CNN部分的链接。
 
 ### 模型训练
 1. 数据集的准备：下载VOC数据集，解压后放在根目录。
